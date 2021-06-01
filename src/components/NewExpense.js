@@ -14,7 +14,7 @@ class NewExpense extends React.Component {
         
         return (
             <div>
-                <ExpenseForm initialValues={{type: 'grocery'}} onSubmit={this.onSubmit}/>
+                <ExpenseForm title='Add Expense' initialValues={{type: 'Groceries'}} onSubmit={this.onSubmit}/>
             </div>
         )
     }

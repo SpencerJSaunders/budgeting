@@ -7,14 +7,6 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 class EditExpense extends React.Component {
 
 
-    componentDidMount() {
-        
-        setTimeout(() => {
-            if(!this.props.expense) {
-                this.props.history.push('/')
-            }
-        }, 1500)
-    }
 
     onSubmit = ((formValues) => {
         if(parseFloat(formValues.amount) !== NaN) {
@@ -40,7 +32,7 @@ class EditExpense extends React.Component {
         const amount = this.props.expense.amount
 
         return (
-            <ExpenseForm initialValues={{title: title, type: type, amount: amount}} onSubmit={this.onSubmit}/>
+            <ExpenseForm title={'Edit Expense'} initialValues={{title: title, type: type, amount: amount}} onSubmit={this.onSubmit}/>
         )
     }
 

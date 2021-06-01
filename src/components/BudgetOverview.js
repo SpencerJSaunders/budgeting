@@ -4,68 +4,134 @@ import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
+import Container from '@material-ui/core/Container'
+import BudgetItem from './BudgetItem'
+import Grid from '@material-ui/core/Grid';
+import '../css/App.css'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import SortBy from './SortBy'
+import 'react-tabs/style/react-tabs.css';
 
 class BudgetOverview extends React.Component {
+
+    state = {
+        expenseSort: 'all'
+    }
+
+    expenseSortUpdate = (sortBy) => {
+        this.setState({
+            expenseSort: sortBy
+        })
+    }
     
     renderIncome = () => {
         return this.props.income.map(incomeItem => {
             return (
-                <div>
-                    <span>{incomeItem.title}</span>
-                    <span>{incomeItem.type}</span>
-                    <span>{incomeItem.amount}</span>
-                    <Link to={`/income/edit/${incomeItem.id}`}>
-                        <EditIcon  />
-                    </Link>
-                    <Link to={`/income/delete/${incomeItem.id}`}>
-                       <DeleteIcon color='error'/>
-                    </Link>
-                </div>
+                <Grid item xs={12} sm={6} md={4}>
+                    <BudgetItem buttons={this.incomeActionButtons(incomeItem.id)} key={incomeItem.id} title={incomeItem.title} type={incomeItem.type} amount={incomeItem.amount}/>
+                </Grid>
             )
         })
     }
 
-    renderExpenses = () => {
-        return this.props.expenses.map(expense => {
-            return (
-                <div>
-                    <span>{expense.title}</span>
-                    <span>{expense.type}</span>
-                    <span>{expense.amount}</span>
-                    <Link to={`/expenses/edit/${expense.id}`}>
-                        <EditIcon />
-                    </Link>
-                    <Link to={`/expenses/delete/${expense.id}`}>
-                        <DeleteIcon />
-                    </Link>
-                </div>
-            )
-        })
-    }
-    
-    render() {
-        console.log(this.props.income)
+    expenseActionButtons = (id) => {
         return (
             <div>
-                <div>
-                    <h1>Income Info:</h1>
-                    {this.renderIncome()}
-                    <Link to ='/income/new'>
-                        <Button variant="contained" color="primary">
-                            Add new Income
-                        </Button>
-                    </Link>
-                </div>
-                <div>
-                    <h1>Expenses Info:</h1>
-                    {this.renderExpenses()}
-                    <Link to ='/expenses/new'>
-                        <Button variant="contained" color="primary">
-                            Add new Expense
-                        </Button>
-                    </Link>
-                </div>
+                <Link to={`/expenses/edit/${id}`}>
+                    <EditIcon className='edit-button'/>
+                </Link>
+                <Link to={`/expenses/delete/${id}`}>
+                    <DeleteIcon className='trash-button'/>
+                </Link>
             </div>
+        )
+    }
+
+    incomeActionButtons = (id) => {
+        return (
+            <div>
+                <Link to={`/income/edit/${id}`}>
+                    <EditIcon className='edit-button' />
+                </Link>
+                <Link to={`/income/delete/${id}`}>
+                    <DeleteIcon className='trash-button'/>
+                </Link>
+            </div>
+        )
+    }
+
+    renderExpenses = () => {
+
+        if(this.props.expenses.length > 0) {
+            if(this.state.expenseSort === 'all')
+                {
+                return this.props.expenses.map(expense => {
+                    return (
+                        <Grid key={expense.id} item xs={12} sm={6} md={4}>
+                            <BudgetItem buttons={this.expenseActionButtons(expense.id)} key={expense.id} title={expense.title} type={expense.type} amount={expense.amount}/>
+                        </Grid>
+                    )
+                })
+            }
+            else {
+                
+                const filteredExpenses = this.props.expenses.filter(expense => {
+                    return expense.type === this.state.expenseSort
+                })
+
+                return filteredExpenses.map(expense => {
+                    return (
+                        <Grid key={expense.id} item xs={12} sm={6} md={4}>
+                            <BudgetItem buttons={this.expenseActionButtons(expense.id)} key={expense.id} title={expense.title} type={expense.type} amount={expense.amount}/>
+                        </Grid>
+                    )
+                })
+               
+        }
+    }
+}
+    
+    render() {
+        return (
+            <Container style={{paddingTop: '30px', textAlign: 'center'}}>
+                <Tabs defaultIndex={0}>
+                    <TabList>
+                        <Tab>Income</Tab>
+                        <Tab>Expenses</Tab>
+                    </TabList>
+
+                    <TabPanel>
+                    <div>
+                        <h1 className='page-title'>Income Info</h1>
+
+                            <Grid style={{marginBottom: '20px'}} container spacing={3}>
+                                {this.renderIncome()}
+                            </Grid>
+                            <Link to ='/income/new'>
+                            <Button variant="contained" color="primary">
+                                Add new Expense
+                            </Button>
+                        </Link>
+                    </div>
+                    </TabPanel>
+                    <TabPanel>
+                    <div>
+                        <h1 className='page-title'>Expenses Info</h1>
+                        <div style={{textAlign:'center'}}>
+                            <SortBy expenseSort={this.state.expenseSort} sortChange={this.expenseSortUpdate} />
+                        </div>
+                        <Grid style={{marginBottom: '20px'}} container spacing={3}>
+                            {this.renderExpenses()}
+                        </Grid>
+                        <Link to ='/expenses/new'>
+                            <Button variant="contained" color="primary">
+                                Add new Expense
+                            </Button>
+                        </Link>
+                    </div>
+                    </TabPanel>
+                </Tabs>
+            </Container>
         )
     }
 }

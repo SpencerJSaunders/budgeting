@@ -2,13 +2,13 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import MenuItem from 'material-ui/MenuItem'
 import {
-    Checkbox,
-    RadioButtonGroup,
+
     SelectField,
-    TextField,
-    Toggle,
-    DatePicker
+    TextField
+
   } from 'redux-form-material-ui'
+import Grid from '@material-ui/core/Grid';
+
 
 class IncomeForm extends React.Component {
    
@@ -17,19 +17,26 @@ class IncomeForm extends React.Component {
    }
 
 
+
+
     render() {
         return (
-            <div>
-                <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                    <Field name="title" component={TextField} hintText='Income name' />
-                    <Field name="amount" component={TextField} hintText='Amount of $' />
-                    <Field name="type" component={SelectField} hintText='Income type'>
-                        <MenuItem value="salary" primaryText="Salary"/>
-                        <MenuItem value="beer-money" primaryText="Beer Money"/>
-                    </Field>
-                    <button className='ui button primary'>Submit</button>
-                </form>
-            </div>
+                    <div className='add-edit-container'>
+                        <h1 className='page-title'>{this.props.title}</h1>
+                        <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+                            <Grid container spacing={3}>
+                                <Grid className='form-item' item xs={12}>
+                                    <Field name="title" component={TextField} hintText='Income name' />
+                                </Grid>
+                                <Grid className='form-item' item xs={12}>
+                                    <Field name="amount" component={TextField} hintText='Amount of $' />
+                                </Grid>
+                            </Grid>
+                                    
+                            <button className='submit-button'><span>Submit</span></button>   
+                                
+                            </form>
+                        </div>
         )
     }
 }

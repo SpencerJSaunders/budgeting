@@ -2,13 +2,11 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import MenuItem from 'material-ui/MenuItem'
 import {
-    Checkbox,
-    RadioButtonGroup,
     SelectField,
-    TextField,
-    Toggle,
-    DatePicker
+    TextField
   } from 'redux-form-material-ui'
+  import Grid from '@material-ui/core/Grid';
+  import expenseTypes from '../expenseTypes'
 
 class ExpenseForm extends React.Component {
    
@@ -16,18 +14,36 @@ class ExpenseForm extends React.Component {
        this.props.onSubmit(formValues)
    }
 
+   renderMenuItems = () => {
+       return expenseTypes.map(type => {
+           return (
+               <MenuItem value={type} primaryText={type} />
+           )
+       })
+   }
+
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                    <Field name="title" component={TextField} hintText='Expense name' />
+            <div className='add-edit-container'>
+             <h1 className='page-title'>{this.props.title}</h1>
+            <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+            <Grid container spacing={3}>
+                    <Grid className='form-item' item xs={12}>
+                        <Field name="title" component={TextField} hintText='Expense name' />
+                    </Grid>
+                    <Grid className='form-item' item xs={12}>
                     <Field name="amount" component={TextField} hintText='Amount of $' />
+                    </Grid>
+                    <Grid className='form-item' item xs={12}>
+
                     <Field name="type" component={SelectField} hintText='Expense type'>
-                        <MenuItem value="grocery" primaryText="Groceries"/>
-                        <MenuItem value="insurance" primaryText="Insurance"/>
+                       {this.renderMenuItems()}
                     </Field>
-                    <button className='ui button primary'>Submit</button>
+                    </Grid>
+            </Grid>
+                <button className='submit-button'>Submit</button>
+
                 </form>
             </div>
         )

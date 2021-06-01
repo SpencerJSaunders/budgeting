@@ -1,0 +1,108 @@
+@font-face {
+    font-family: 'TTNorms-Regular';
+    font-style: normal;
+    src: url('../fonts/TTNorms-Regular.ttf') format('truetype'), url('../fonts/TTNorms-Regular.woff') format('woff');
+}
+@font-face {
+    font-family: 'SFMonoRegular';
+    font-style: normal;
+    src: url('../fonts/SFMonoRegular.ttf') format('truetype'), url('../fonts/SFMonoRegular.woff') format('woff');
+}
+@font-face {
+    font-family: 'TTNorms-Regular';
+    font-style: normal;
+    font-weight: bold;
+    src: url('../fonts/TTNorms-Bold.ttf') format('truetype'), url('../fonts/TTNorms-Bold.woff') format('woff');
+}
+@font-face {
+    font-family: 'BradleyHandITC';
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/Bradley-Hand-ITC.woff") format("woff"), 
+   /* Modern Browsers */
+    url('../fonts/Bradley-Hand-ITC.ttf') format('truetype');
+}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    font-family: 'TTNorms-Regular', 'BradleyHandITC', serif;
+}
+
+.container-outline {
+    border: 1px solid lightgrey;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 10px;
+}
+
+
+.page-title {
+    margin-bottom: 20px;
+    font-weight: 300;
+    text-align: center;
+}
+
+.sort-menu {
+    border: 1px solid black !important;
+    display: block !important;
+    margin-bottom: 20px !important;
+}
+
+.submit-button {
+    border-radius: 25px;
+    color: white;
+    border: 1px solid lightgrey;
+    padding: 10px 35px;
+    background-color: rgb(65, 65, 228);
+    font-size: 16px;
+}
+
+.submit-button:hover {
+    background-color: rgb(51, 51, 209);
+    cursor: pointer;
+}
+
+
+
+.add-edit-container {
+    text-align: center;
+    padding: 20px 0;
+    background-color: white;
+    border-radius: 25px;
+    margin: 50px auto 0 auto;
+    max-width: 90%;
+    display: block;
+    -webkit-box-shadow: 1px 5px 20px 1px #828282; 
+    box-shadow: 1px 5px 20px 1px #828282;
+}
+
+
+
+.trash-button {
+    color: red;
+}
+
+.edit-button {
+    color: orange;
+}
+
+.edit-button:hover {
+    color: rgb(196, 135, 22);
+}
+
+.trash-button:hover {
+    color: rgb(182, 39, 39);
+}
+
+@media only screen and (min-width: 992px) {
+    .add-edit-container {
+       max-width: 30%;
+       border: 1px solid lightgrey;
+    }
+  }
+
+  @media only screen and (min-width: 576px) and (max-width: 991px) {
+    .add-edit-container {
+       max-width: 60%;
+       border: 1px solid lightgrey;
+    }
+  }

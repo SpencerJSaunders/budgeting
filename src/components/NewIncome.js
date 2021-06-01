@@ -6,15 +6,20 @@ import {addIncome} from '../actions/'
 class NewIncome extends React.Component {
 
     onSubmit = ((formValues) => {
-        this.props.addIncome(formValues, this.props.history)
-    })
+        if(parseFloat(formValues.amount)) {
+            this.props.addIncome(formValues, this.props.history)
+            }
+    
+            else {
+                console.log('Enter a valid number')
+            }    })
 
 
     render() {
         console.log(this.props)
         return (
             <div>
-                <IncomeForm initialValues={{type: 'salary'}} onSubmit={this.onSubmit}/>
+                <IncomeForm title={'Add Income Item'} onSubmit={this.onSubmit}/>
             </div>
         )
     }

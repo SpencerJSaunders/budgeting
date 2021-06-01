@@ -6,25 +6,16 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 
 class EditIncome extends React.Component {
 
-    componentDidMount() {
-        
-        setTimeout(() => {
-            if(!this.props.expense) {
-                this.props.history.push('/')
-            }
-        }, 1500)
-    }
-
 
 
     onSubmit = ((formValues) => {
-        if(parseFloat(formValues.amount)) {
-        this.props.editIncome(formValues, this.props.match.params.id, this.props.history)
-        }
+            if(parseFloat(formValues.amount)) {
+            this.props.editIncome(formValues, this.props.match.params.id, this.props.history)
+            }
 
-        else {
-            console.log('Enter a valid number')
-        }
+            else {
+                console.log('Enter a valid number')
+            }
     })
 
     renderIncomeItem() {
@@ -41,7 +32,7 @@ class EditIncome extends React.Component {
         const amount = this.props.income.amount
 
         return (
-            <IncomeForm initialValues={{title: title, type: type, amount: amount}} onSubmit={this.onSubmit}/>
+            <IncomeForm title='Edit Income Item' initialValues={{title: title, amount: amount}} onSubmit={this.onSubmit}/>
         )
     }
 

@@ -8,15 +8,16 @@ import DeleteExpense from './DeleteExpense'
 import EditExpense from './EditExpense'
 import EditIncome from './EditIncome'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import Container from '@material-ui/core/Container';
+import Header from './Header'
+import '../css/App.css'
 
 class App extends React.Component {
     render() {
         return (
             <div>
                 <MuiThemeProvider>
-                    <Container>
                         <HashRouter>
+                        <Header />
                             <Route path='/' exact component={BudgetOverview} />
                             <Route path='/income/new/' exact component={NewIncome} />
                             <Route path='/income/edit/:id' exact component={EditIncome} />
@@ -25,7 +26,6 @@ class App extends React.Component {
                             <Route path='/expenses/edit/:id' exact component={EditExpense} />
                             <Route path='/expenses/delete/:id' exact component={DeleteExpense} />
                         </HashRouter>
-                    </Container>
                 </MuiThemeProvider>
             </div>
         )
