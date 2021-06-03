@@ -10,11 +10,22 @@ class DeleteExpense extends React.Component {
     render() {
         return (
             <div className='add-edit-container'>
-                <Button onClick={() => this.props.deleteExpense(this.props.match.params.id, this.props.history)} variant="contained" color="primary">Delete</Button>
-                <Link to ='/'>Cancel</Link>
-            </div>
+                <h1 className='delete-title'>Are you sure you want to delete '{`${this.props.expense.title}`}'?</h1>
+                <Button onClick={() => this.props.deleteExpense(this.props.match.params.id, this.props.history)} variant="contained" color="secondary">Delete</Button>
+                <Link style={{ textDecoration: 'none', marginLeft: '10px'}} to ='/'>
+                    <Button variant="contained" color="primary">
+                        Cancel
+                    </Button>
+                </Link>           
+             </div>
         )
     }
 }
 
-export default connect(null, {deleteExpense})(DeleteExpense)
+const mapStateToProps = (state, ownProps) => {
+    return {
+        expense: state.expenses[ownProps.match.params.id]
+    }
+}
+
+export default connect(mapStateToProps, {deleteExpense})(DeleteExpense)

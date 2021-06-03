@@ -5,7 +5,8 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
 import Container from '@material-ui/core/Container'
-
+import LocalAtmIcon from '@material-ui/icons/LocalAtm';
+import Logo from '../images/logo.png'
 class Header extends React.Component {
    
 
@@ -13,14 +14,14 @@ class Header extends React.Component {
 
     render() {
         return (
-                <AppBar position="static">
+                <AppBar id='header' position="static">
                                 <Container>
 
                 <Toolbar>
-                <Typography variant="h6">
-                    Budgeting
-                </Typography>
-                <Link to='/'>
+                
+                <img style={{maxWidth: '80px'}} src={Logo} />
+
+                <Link to='/' style={{ textDecoration: 'none' }}>
                     <Button style={{color: 'white'}}>
                         Home
                     </Button>

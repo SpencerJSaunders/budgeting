@@ -11,6 +11,7 @@ import '../css/App.css'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SortBy from './SortBy'
 import 'react-tabs/style/react-tabs.css';
+import BudgetMetrics from './BudgetMetrics'
 
 class BudgetOverview extends React.Component {
 
@@ -28,7 +29,7 @@ class BudgetOverview extends React.Component {
         return this.props.income.map(incomeItem => {
             return (
                 <Grid item xs={12} sm={6} md={4}>
-                    <BudgetItem buttons={this.incomeActionButtons(incomeItem.id)} key={incomeItem.id} title={incomeItem.title} type={incomeItem.type} amount={incomeItem.amount}/>
+                    <BudgetItem buttons={this.incomeActionButtons(incomeItem.id)} key={incomeItem.id} title={incomeItem.title} amount={incomeItem.amount}/>
                 </Grid>
             )
         })
@@ -67,7 +68,7 @@ class BudgetOverview extends React.Component {
                 {
                 return this.props.expenses.map(expense => {
                     return (
-                        <Grid key={expense.id} item xs={12} sm={6} md={4}>
+                        <Grid item xs={12} sm={6} md={4}>
                             <BudgetItem buttons={this.expenseActionButtons(expense.id)} key={expense.id} title={expense.title} type={expense.type} amount={expense.amount}/>
                         </Grid>
                     )
@@ -81,7 +82,7 @@ class BudgetOverview extends React.Component {
 
                 return filteredExpenses.map(expense => {
                     return (
-                        <Grid key={expense.id} item xs={12} sm={6} md={4}>
+                        <Grid item xs={12} sm={6} md={4}>
                             <BudgetItem buttons={this.expenseActionButtons(expense.id)} key={expense.id} title={expense.title} type={expense.type} amount={expense.amount}/>
                         </Grid>
                     )
@@ -94,6 +95,7 @@ class BudgetOverview extends React.Component {
     render() {
         return (
             <Container style={{paddingTop: '30px', textAlign: 'center'}}>
+                <BudgetMetrics />
                 <Tabs defaultIndex={0}>
                     <TabList>
                         <Tab>Income</Tab>
@@ -102,29 +104,28 @@ class BudgetOverview extends React.Component {
 
                     <TabPanel>
                     <div>
-                        <h1 className='page-title'>Income Info</h1>
 
-                            <Grid style={{marginBottom: '20px'}} container spacing={3}>
-                                {this.renderIncome()}
+                            <Grid container spacing={3}>
+                               
+                                    {this.renderIncome()}
                             </Grid>
-                            <Link to ='/income/new'>
-                            <Button variant="contained" color="primary">
-                                Add new Expense
-                            </Button>
-                        </Link>
+                            <Link to ='/income/new' style={{ textDecoration: 'none'}}>
+                                <Button variant="contained" className='green-button' style={{marginTop: '50px'}}>
+                                    Add new Income
+                                </Button>
+                            </Link>
                     </div>
                     </TabPanel>
                     <TabPanel>
                     <div>
-                        <h1 className='page-title'>Expenses Info</h1>
                         <div style={{textAlign:'center'}}>
                             <SortBy expenseSort={this.state.expenseSort} sortChange={this.expenseSortUpdate} />
                         </div>
-                        <Grid style={{marginBottom: '20px'}} container spacing={3}>
+                        <Grid container spacing={3}>
                             {this.renderExpenses()}
                         </Grid>
-                        <Link to ='/expenses/new'>
-                            <Button variant="contained" color="primary">
+                        <Link to ='/expenses/new' style={{ textDecoration: 'none'}}>
+                            <Button variant="contained" className='green-button' style={{marginTop: '50px'}}>
                                 Add new Expense
                             </Button>
                         </Link>
